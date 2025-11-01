@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { 
   ChevronDown, 
   HelpCircle, 
@@ -15,7 +16,13 @@ import {
   Scale, 
   ArrowUpDown,
   FileText,
-  Mail
+  Mail,
+  Search,
+  Users,
+  CreditCard,
+  RefreshCw,
+  Eye,
+  Lock
 } from "lucide-react";
 
 const faqs = [
@@ -30,7 +37,7 @@ const faqs = [
     id: 2,
     question: "What is a Responsible Person under Article 16?",
     answer: "The Responsible Person is required under Article 16 of Regulation (EU) 2023/988 on General Product Safety. This person must be established within the EU and is responsible for ensuring the product's compliance with safety requirements. The Responsible Person handles product safety obligations, cooperation with authorities, and incident reporting.",
-    icon: Shield,
+    icon: Users,
     category: "Legal"
   },
   {
@@ -51,7 +58,7 @@ const faqs = [
     id: 5,
     question: "What happens when my designation expires?",
     answer: "You'll receive automated email reminders at 30, 7, and 1 day before your designation expires. You can renew your designation through your client portal with one-click payment and contract re-signature. If a designation expires without renewal, all associated products will be marked as inactive in the public verification system.",
-    icon: Clock,
+    icon: RefreshCw,
     category: "Process"
   },
   {
@@ -93,10 +100,16 @@ const faqs = [
 
 export default function FAQPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(1);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const toggleFaq = (id: number) => {
     setOpenFaq(openFaq === id ? null : id);
   };
+
+  const filteredFaqs = faqs.filter(faq => 
+    faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -133,53 +146,83 @@ export default function FAQPage() {
 
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl space-y-4">
-            {faqs.map((faq) => {
-              const Icon = faq.icon;
-              const isOpen = openFaq === faq.id;
-              
-              return (
-                <Card 
-                  key={faq.id} 
-                  className={`transition-all duration-300 hover:shadow-lg ${
-                    isOpen ? 'border-primary shadow-md' : ''
-                  }`}
-                >
-                  <CardHeader 
-                    className="cursor-pointer"
-                    onClick={() => toggleFaq(faq.id)}
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-start gap-3 flex-1">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0 mt-1">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <CardTitle className="text-lg">{faq.question}</CardTitle>
-                            <Badge variant="secondary" className="text-xs">
-                              {faq.category}
-                            </Badge>
-                          </div>
-                        </div>
-                      </div>
-                      <ChevronDown 
-                        className={`h-5 w-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${
-                          isOpen ? 'rotate-180' : ''
-                        }`} 
-                      />
-                    </div>
-                  </CardHeader>
-                  {isOpen && (
-                    <CardContent className="pt-0 animate-in fade-in-50 duration-300">
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </CardContent>
-                  )}
+          <div className="mx-auto max-w-4xl">
+            {/* Search Bar */}
+            <div className="mb-8">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Search FAQs..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+              {searchQuery && (
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Found {filteredFaqs.length} result{filteredFaqs.length !== 1 ? 's' : ''}
+                </p>
+              )}
+            </div>
+
+            {/* FAQ List */}
+            <div className="space-y-4">
+              {filteredFaqs.length === 0 ? (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <p className="text-muted-foreground">No FAQs found matching your search.</p>
+                  </CardContent>
                 </Card>
-              );
-            })}
+              ) : (
+                filteredFaqs.map((faq) => {
+                  const Icon = faq.icon;
+                  const isOpen = openFaq === faq.id;
+                  
+                  return (
+                    <Card 
+                      key={faq.id} 
+                      className={`transition-all duration-300 hover:shadow-lg ${
+                        isOpen ? 'border-primary shadow-md' : ''
+                      }`}
+                    >
+                      <CardHeader 
+                        className="cursor-pointer"
+                        onClick={() => toggleFaq(faq.id)}
+                      >
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-3 flex-1">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0">
+                              <Icon className="h-5 w-5" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <CardTitle className="text-lg">{faq.question}</CardTitle>
+                                <Badge variant="secondary" className="text-xs">
+                                  {faq.category}
+                                </Badge>
+                              </div>
+                            </div>
+                          </div>
+                          <ChevronDown 
+                            className={`h-5 w-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${
+                              isOpen ? 'rotate-180' : ''
+                            }`} 
+                          />
+                        </div>
+                      </CardHeader>
+                      {isOpen && (
+                        <CardContent className="pt-0 animate-in fade-in-50 duration-300 pl-[4.5rem]">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </CardContent>
+                      )}
+                    </Card>
+                  );
+                })
+              )}
+            </div>
           </div>
         </div>
       </section>
