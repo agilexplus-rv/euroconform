@@ -332,10 +332,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold tracking-tight mb-4">Get in Touch</h2>
               <p className="text-lg text-muted-foreground">
-                Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
-              </p>
-              <p className="text-sm text-muted-foreground mt-2 italic">
-                (Protected by spam protection and monitored submission tracking)
+                Have questions? We&apos;d love to hear from you.
               </p>
             </div>
 
