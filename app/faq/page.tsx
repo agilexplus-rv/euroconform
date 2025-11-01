@@ -248,7 +248,7 @@ export default function FAQPage() {
               <Button asChild size="lg" className="bg-white text-primary hover:bg-gray-100">
                 <Link href="/#contact">Contact Us</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button asChild size="lg" variant="outline" className="border-white text-[#0A3D91] hover:bg-primary hover:text-white hover:border-white">
                 <Link href="/#pricing">View Pricing</Link>
               </Button>
             </div>
