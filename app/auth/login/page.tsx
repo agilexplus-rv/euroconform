@@ -102,7 +102,7 @@ export default function LoginPage() {
 
               <div className="mt-6 text-center text-sm text-muted-foreground">
                 Don&apos;t have an account?{' '}
-                <Link href="/pricing" className="text-primary hover:underline">
+                <Link href="/#pricing" className="text-primary hover:underline">
                   Get started
                 </Link>
               </div>
