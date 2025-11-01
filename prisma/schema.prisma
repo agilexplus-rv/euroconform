@@ -1,0 +1,297 @@
+// EuroConform Ltd Database Schema
+// PostgreSQL with Prisma ORM
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = []
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User management - linked to Keycloak
+model User {
+  id            String    @id @default(cuid())
+  keycloakId    String    @unique
+  email         String    @unique
+  firstName     String?
+  lastName      String?
+  role          UserRole  @default(CLIENT)
+  twoFactorEnabled Boolean @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relations
+  organisation  Organisation?
+  auditLogs     EventLog[]
+  
+  @@index([keycloakId])
+  @@index([email])
+}
+
+enum UserRole {
+  CLIENT
+  ADMIN
+  PARTNER
+}
+
+// Organisation/Company profile
+model Organisation {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  name              String
+  registrationNumber String?
+  address           String
+  country           String
+  vatNumber         String?
+  phone             String?
+  contactEmail      String
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  // Relations
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscriptions     Subscription[]
+  designations      Designation[]
+  
+  @@index([userId])
+}
+
+// Subscription packages (Bronze, Silver, Gold)
+model Subscription {
+  id                String    @id @default(cuid())
+  organisationId    String
+  package           PackageType
+  status            SubscriptionStatus @default(ACTIVE)
+  stripeCustomerId  String?
+  stripeSubscriptionId String?
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  // Relations
+  organisation      Organisation @relation(fields: [organisationId], references: [id], onDelete: Cascade)
+  payments          Payment[]
+  
+  @@index([organisationId])
+  @@index([stripeSubscriptionId])
+}
+
+enum PackageType {
+  BRONZE
+  SILVER
+  GOLD
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  TRIALING
+}
+
+// Designation = EU Authorised Representative / Responsible Person
+model Designation {
+  id                String    @id @default(cuid())
+  organisationId    String
+  type              DesignationType
+  status            DesignationStatus @default(DRAFT)
+  uniqueId          String?   @unique // ULID
+  
+  // Contract details
+  contractHash      String?   // QES hash
+  contractSignedAt  DateTime?
+  contractExpiresAt DateTime?
+  
+  // Product limits
+  maxProducts       Int       @default(10) // Based on package
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  // Relations
+  organisation      Organisation @relation(fields: [organisationId], references: [id], onDelete: Cascade)
+  products          Product[]
+  
+  @@index([organisationId])
+  @@index([uniqueId])
+  @@index([status])
+}
+
+enum DesignationType {
+  EU_AUTHORISED_REPRESENTATIVE // Article 4 (EU) 2019/1020
+  RESPONSIBLE_PERSON           // Article 16 (EU) 2023/988
+}
+
+enum DesignationStatus {
+  DRAFT
+  PENDING_SIGNATURE
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+// Product listings
+model Product {
+  id              String    @id @default(cuid())
+  designationId   String
+  name            String
+  model           String?
+  category        String?
+  description     String?
+  status          ProductStatus @default(DRAFT)
+  uniqueCode      String    @unique // ULID for verification
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  // Relations
+  designation     Designation @relation(fields: [designationId], references: [id], onDelete: Cascade)
+  
+  @@index([designationId])
+  @@index([uniqueCode])
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  EXPIRED
+  INACTIVE
+}
+
+// Payment transactions
+model Payment {
+  id                String    @id @default(cuid())
+  subscriptionId    String
+  type              PaymentType
+  amount            Int       // Cents
+  currency          String    @default("eur")
+  status            PaymentStatus
+  stripePaymentId   String?   @unique
+  stripeInvoiceId   String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  // Relations
+  subscription      Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  
+  @@index([subscriptionId])
+  @@index([stripePaymentId])
+  @@index([status])
+}
+
+enum PaymentType {
+  SUBSCRIPTION
+  ADDON_TECHNICAL_CHECK
+  ADDON_DPP_ONBOARDING
+  RENEWAL
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+// Audit trail (append-only)
+model EventLog {
+  id              String    @id @default(cuid())
+  userId          String?
+  type            EventType
+  entity          String    // model name
+  entityId        String
+  action          String    // CREATE, UPDATE, DELETE
+  changes         Json?     // before/after diff
+  ipAddress       String?
+  userAgent       String?
+  timestamp       DateTime  @default(now())
+  
+  // Relations
+  user            User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  @@index([userId])
+  @@index([entity, entityId])
+  @@index([timestamp])
+}
+
+enum EventType {
+  USER_LOGIN
+  USER_LOGOUT
+  SUBSCRIPTION_CREATED
+  SUBSCRIPTION_UPDATED
+  DESIGNATION_CREATED
+  DESIGNATION_SIGNED
+  DESIGNATION_EXPIRED
+  PRODUCT_CREATED
+  PRODUCT_UPDATED
+  PRODUCT_DELETED
+  PAYMENT_COMPLETED
+  PAYMENT_FAILED
+  LABEL_GENERATED
+  CONTRACT_SIGNED
+}
+
+// Partner referrals
+model Partner {
+  id                String    @id @default(cuid())
+  name              String
+  email             String    @unique
+  company           String?
+  phone             String?
+  commissionRate    Float     @default(20.0) // percentage
+  status            PartnerStatus @default(PENDING)
+  referralCode      String    @unique
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([referralCode])
+  @@index([status])
+}
+
+enum PartnerStatus {
+  PENDING
+  APPROVED
+  SUSPENDED
+}
+
+// Trade fairs CMS
+model TradeFair {
+  id              String    @id @default(cuid())
+  name            String
+  location        String
+  startDate       DateTime
+  endDate         DateTime
+  website         String?
+  description     String?
+  isPublished     Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  @@index([isPublished])
+  @@index([startDate])
+}
+
+// Email queue for reminders
+model EmailQueue {
+  id              String    @id @default(cuid())
+  to              String
+  subject         String
+  body            String
+  status          EmailStatus @default(PENDING)
+  attempts        Int       @default(0)
+  scheduledAt     DateTime
+  sentAt          DateTime?
+  createdAt       DateTime  @default(now())
+  
+  @@index([status])
+  @@index([scheduledAt])
+}
+
+enum EmailStatus {
+  PENDING
+  SENT
+  FAILED
+}
