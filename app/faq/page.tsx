@@ -22,7 +22,8 @@ import {
   CreditCard,
   RefreshCw,
   Eye,
-  Lock
+  Lock,
+  X
 } from "lucide-react";
 
 const faqs = [
@@ -156,8 +157,16 @@ export default function FAQPage() {
                   placeholder="Search FAQs..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-12 text-base"
+                  className="pl-10 pr-10 h-12 text-base"
                 />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                )}
               </div>
               {searchQuery && (
                 <p className="mt-2 text-sm text-muted-foreground">
