@@ -180,52 +180,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ Teaser */}
-      <section id="faq-teaser" className="py-24">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl">
-            <Card className="border-primary border-2 hover:shadow-xl transition-shadow duration-300">
-              <CardHeader>
-                <div className="flex items-center gap-3 mb-2">
-                  <HelpCircle className="h-8 w-8 text-primary" />
-                  <CardTitle className="text-2xl">Frequently Asked Questions</CardTitle>
-                </div>
-                <CardDescription className="text-base">
-                  Quick answers to common questions about our EU compliance services
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="border-l-4 border-primary pl-4 py-2">
-                    <h4 className="font-semibold mb-1">What is an EU Authorised Representative?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Under Article 4 of Regulation (EU) 2019/1020, non-EU manufacturers must designate an EU-based representative to ensure product compliance and act as a contact point for market surveillance authorities.
-                    </p>
-                  </div>
-                  <div className="border-l-4 border-primary pl-4 py-2">
-                    <h4 className="font-semibold mb-1">What is a Responsible Person?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Required under Article 16 of Regulation (EU) 2023/988, the Responsible Person ensures product safety compliance, handles incident reporting, and cooperates with EU authorities.
-                    </p>
-                  </div>
-                  <div className="border-l-4 border-primary pl-4 py-2">
-                    <h4 className="font-semibold mb-1">How quickly can I get started?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Complete your subscription and create your designation in minutes. Upload your documents and sign the contract electronically to activate your EU compliance services.
-                    </p>
-                  </div>
-                </div>
-                <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white">
-                  <Link href="/faq">View All FAQs <ArrowRight className="ml-2 h-4 w-4 inline" /></Link>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 bg-gray-50">
+      <section id="pricing" className="py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Simple, Transparent Pricing</h2>
@@ -323,10 +279,8 @@ export default function Home() {
             </Card>
           </div>
         </div>
-      </section>
 
-      {/* Additional Services */}
-      <section className="py-16 bg-white">
+        <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl">
             <h3 className="text-2xl font-bold text-center mb-8">Additional Services</h3>
@@ -350,6 +304,9 @@ export default function Home() {
         </div>
       </section>
 
+      </section>
+
+
       {/* Contact Section */}
       <section id="contact" className="py-24">
         <div className="container mx-auto px-4">
@@ -357,7 +314,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold tracking-tight mb-4">Get in Touch</h2>
               <p className="text-lg text-muted-foreground">
-                Have questions? We&apos;d love to hear from you.
+                Have questions? We&apos;d love to hear from you
               </p>
             </div>
 
