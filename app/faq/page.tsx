@@ -15,8 +15,8 @@ export default function FAQPage() {
           </Link>
           <nav className="flex items-center gap-6">
             <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
-            <Link href="/pricing" className="text-sm font-medium hover:text-primary transition-colors">Pricing</Link>
-            <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</Link>
+            <Link href="/#faq-teaser" className="text-sm font-medium hover:text-primary transition-colors">FAQ</Link>
+            <Link href="/#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact Us</Link>
             <Button asChild><Link href="/auth/login">Sign In</Link></Button>
           </nav>
         </div>

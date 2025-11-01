@@ -34,6 +34,11 @@ export default function LoginPage() {
             </div>
             <span className="text-xl font-bold">EuroConform</span>
           </Link>
+          <nav className="flex items-center gap-6">
+            <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
+            <Link href="/#faq-teaser" className="text-sm font-medium hover:text-primary transition-colors">FAQ</Link>
+            <Link href="/#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact Us</Link>
+          </nav>
         </div>
       </header>
 
