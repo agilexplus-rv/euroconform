@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,32 +10,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2, Shield, Globe2, FileCheck, Star, ArrowRight, HelpCircle } from "lucide-react";
 import { config } from "@/lib/config";
+import { StickyHeader } from "@/components/sticky-header";
 
 export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [navVisible, setNavVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 50);
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setNavVisible(false);
-      } else {
-        setNavVisible(true);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,45 +34,14 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Sticky Header */}
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 border-b bg-white transition-transform duration-300 ${
-          navVisible ? 'translate-y-0' : '-translate-y-full'
-        }`}
-      >
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-xl">
-              EC
-            </div>
-            <span className="text-xl font-bold">EuroConform</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
-              Home
-            </Link>
-            <Link href="#faq-teaser" className="text-sm font-medium hover:text-primary transition-colors">
-              FAQ
-            </Link>
-            <Link href="#contact" className="text-sm font-medium hover:text-primary transition-colors">
-              Contact Us
-            </Link>
-            <Button asChild>
-              <Link href="/auth/login">Sign In</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
-
-      {/* Spacer for fixed header */}
-      <div className="h-16" />
+      <StickyHeader />
 
       {/* Hero Section */}
       <section id="home" className="relative overflow-hidden bg-gradient-to-br from-[#0A3D91] to-[#0E57C5] text-white">
         <div className="container mx-auto px-4 py-24 lg:py-32">
           <div className="mx-auto max-w-3xl text-center animate-in fade-in duration-1000">
             <Badge variant="secondary" className="mb-6">
-              Professional EU Compliance Services
+              Professional EU Product Compliance Services
             </Badge>
             <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               Your Gateway to EU Product Compliance

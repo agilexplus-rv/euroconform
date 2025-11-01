@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, XCircle, AlertCircle } from "lucide-react";
+import { Header } from "@/components/header";
 
 interface VerifyPageProps {
   params: Promise<{ code: string }>;
@@ -49,22 +50,7 @@ export default async function VerifyPage({ params }: VerifyPageProps) {
 
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
-      {/* Header */}
-      <header className="border-b bg-white">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-xl">
-              EC
-            </div>
-            <span className="text-xl font-bold">EuroConform</span>
-          </div>
-          <nav className="flex items-center gap-6">
-            <a href="/" className="text-sm font-medium hover:text-primary transition-colors">
-              Home
-            </a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content */}
       <main className="flex-1 py-24">

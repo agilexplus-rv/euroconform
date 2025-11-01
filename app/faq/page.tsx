@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Header } from "@/components/header";
 import { 
   ChevronDown, 
   HelpCircle, 
@@ -114,22 +115,7 @@ export default function FAQPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="border-b bg-white">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-xl">
-              EC
-            </div>
-            <span className="text-xl font-bold">EuroConform</span>
-          </Link>
-          <nav className="flex items-center gap-6">
-            <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
-            <Link href="/#faq-teaser" className="text-sm font-medium hover:text-primary transition-colors">FAQ</Link>
-            <Link href="/#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact Us</Link>
-            <Button asChild><Link href="/auth/login">Sign In</Link></Button>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <section className="py-24 bg-gradient-to-br from-[#0A3D91] to-[#0E57C5] text-white">
         <div className="container mx-auto px-4">
