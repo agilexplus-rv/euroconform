@@ -1,196 +1,291 @@
-# EuroConform Ltd - EU Compliance Platform
+# 🏛️ EuroConform Ltd - EU Compliance Platform
 
 **Your Gateway to EU Product Compliance**
 
-EuroConform provides comprehensive EU Authorised Representative (Article 4 Regulation (EU) 2019/1020) and Responsible Person (Article 16 Regulation (EU) 2023/988) services for non-EU manufacturers and online sellers.
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
+
+Professional platform for EU Authorised Representative (Article 4 Regulation EU 2019/1020) and Responsible Person (Article 16 Regulation EU 2023/988) services.
+
+---
 
 ## 🎯 Mission
 
 To provide non-EU manufacturers and online sellers with a reliable, transparent, and future-ready compliance partner ensuring smooth EU market access and alignment with emerging sustainability and environmental obligations.
 
+**Tagline**: "EuroConform – Your Gateway to EU Product Compliance"
+
+---
+
 ## ✨ Features
 
-### Public Portal
-- **Home Page**: Brand presentation with legal citations
-- **Pricing**: Transparent Bronze/Silver/Gold packages
-- **FAQ**: Comprehensive answers about Articles 4 & 16
-- **Contact**: Form forwarding to rudvel@gmail.com
-- **Product Verification**: Public QR code validation at `/verify/[code]`
+### 🌐 Public Portal
+- **Home** - Brand presentation with EU legislation citations
+- **Pricing** - Transparent Bronze/Silver/Gold annual packages
+- **FAQ** - Comprehensive Articles 4 & 16 explanations
+- **Contact** - Email integration to rudvel@gmail.com
+- **Product Verification** - Public QR code validation portal
 
-### Client Portal (Keycloak-Protected)
-- **Dashboard**: Overview of designations & subscriptions
-- **Organisation Profile**: Company and billing management
-- **Designation Wizard**: Annual workflow with QES contract
-- **Product Management**: CRUD within package limits + label download
-- **Contract Vault**: Signed PDFs with eIDAS validation
-- **Audit Trail**: View + CSV/XLSX export
-- **Account Management**: 2FA, password, notifications
+### 🔐 Client Portal (Keycloak-Protected)
+- **Dashboard** - Overview of designations & subscriptions
+- **Product Management** - CRUD within package limits + label download
+- **Designation Wizard** - Annual workflow with QES contract signing
+- **Contract Vault** - Signed PDFs with eIDAS validation
+- **Audit Trail** - Complete history with CSV/XLSX export
+- **Account Management** - 2FA, password, notifications
 
-### Admin Area
+### 👥 Admin Area
 - User and organisation management
 - Designation and contract oversight
 - Audit trail browser
 - Package configuration
 - Partner & trade fair management
 
+---
+
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15 (App Router, TypeScript)
-- **UI**: Tailwind CSS + shadcn/ui + lucide-react icons
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: Keycloak (2FA TOTP, OIDC)
-- **Payments**: Stripe (annual subscriptions + add-ons)
-- **Queue**: Redis + BullMQ (reminders & webhooks)
-- **Email**: SMTP to rudvel@gmail.com
-- **Storage**: S3/MinIO for PDF/SVG documents
-- **Deployment**: Docker Compose on Hetzner VPS
+| Layer | Technology |
+|-------|------------|
+| **Framework** | Next.js 15 (App Router, TypeScript) |
+| **UI** | Tailwind CSS v4 + shadcn/ui + lucide-react |
+| **Database** | PostgreSQL 16 with Prisma ORM |
+| **Authentication** | Keycloak (2FA TOTP, OIDC) |
+| **Payments** | Stripe (annual subscriptions + add-ons) |
+| **Queue** | Redis + BullMQ (reminders & webhooks) |
+| **Email** | SMTP integration |
+| **Storage** | MinIO/S3 for documents |
+| **Deployment** | Docker Compose on Hetzner VPS |
+
+---
 
 ## 📦 Pricing
 
 | Package | Products | Annual Fee | Features |
 |---------|----------|------------|----------|
-| Bronze | 1-10 | €1,000 | EU address, labels, verification, email support |
-| Silver | 11-50 | €1,800 | Priority support, audit export, onboarding |
-| Gold | 50+ | €3,000 | Dedicated manager, SLA, custom limits |
+| **Bronze** | 1-10 | €1,000 | EU address, labels, verification, email support |
+| **Silver** | 11-50 | €1,800 | Priority support, audit export, onboarding help |
+| **Gold** | 50+ | €3,000 | Dedicated manager, SLA, custom limits |
 
-**Add-ons**:
-- Technical File Check: €100/hour
-- DPP Onboarding: €200/SKU (Phase 2, hidden initially)
+**Add-ons**: Technical File Check (€100/hr), DPP Onboarding (€200/SKU)  
+**Referral Programme**: 20% commission for approved partners
 
-**Referrals**: 20% commission for approved partners
+---
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-
 - Node.js 20+
 - Docker & Docker Compose
 - PostgreSQL 16
-- Redis 7
+- Git
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd EuroConform
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-4. **Start services with Docker Compose**
-   ```bash
-   docker-compose up -d
-   ```
-
-5. **Run database migrations**
-   ```bash
-   npm run db:push
-   ```
-
-6. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-The application will be available at `http://localhost:3000`
-
-## 🐳 Docker Deployment
-
-### Local Development
 ```bash
+# Clone repository
+git clone https://github.com/agilexplus-rv/euroconform.git
+cd euroconform
+
+# Install dependencies
+npm install
+
+# Set up environment
+cp .env.example .env
+# Edit .env with your configuration
+
+# Generate Prisma client
+npm run db:push
+
+# Start development server
+npm run dev
+```
+
+Visit `http://localhost:3000` to see your platform!
+
+### Docker Development
+
+```bash
+# Start all services
 docker-compose up -d
+
+# View logs
+docker-compose logs -f app
+
+# Stop services
+docker-compose down
 ```
 
-### Production (Hetzner VPS)
+---
 
-1. **Set up Nginx reverse proxy with Let's Encrypt**
-   ```bash
-   # Install Certbot
-   sudo apt update
-   sudo apt install certbot python3-certbot-nginx
+## 📊 Database Schema
 
-   # Obtain SSL certificate
-   sudo certbot certonly --nginx -d euroconform.eu -d www.euroconform.eu
+Complete Prisma schema with:
+- **User** management with Keycloak integration
+- **Organisation** profiles
+- **Subscription** packages (Bronze/Silver/Gold)
+- **Designation** workflows (EU Authorised Rep / Responsible Person)
+- **Product** management with unique verification codes
+- **Payment** transactions with Stripe integration
+- **EventLog** audit trail (append-only)
+- **Partner** referral program
+- **TradeFair** CMS
+- **EmailQueue** for automated reminders
 
-   # Configure Nginx
-   sudo cp nginx.conf /etc/nginx/sites-available/euroconform
-   sudo ln -s /etc/nginx/sites-available/euroconform /etc/nginx/sites-enabled/
-   sudo nginx -t
-   sudo systemctl reload nginx
-   ```
-
-2. **Build and deploy**
-   ```bash
-   docker-compose -f docker-compose.yml build
-   docker-compose -f docker-compose.yml up -d
-   ```
-
-## 📁 Project Structure
-
-```
-EuroConform/
-├── app/                    # Next.js App Router pages
-│   ├── page.tsx           # Home page
-│   ├── pricing/           # Pricing page
-│   ├── faq/               # FAQ page
-│   ├── contact/           # Contact form
-│   ├── verify/            # Product verification
-│   └── layout.tsx         # Root layout
-├── lib/                   # Core utilities
-│   ├── prisma.ts          # Database client
-│   ├── stripe.ts          # Stripe integration
-│   ├── email.ts           # Email templates
-│   ├── label.ts           # Label generation (SVG/PDF)
-│   ├── qr.ts              # QR code generation
-│   ├── audit.ts           # Audit logging
-│   └── config.ts          # App configuration
-├── components/            # React components
-│   └── ui/                # shadcn/ui components
-├── prisma/
-│   └── schema.prisma      # Database schema
-├── public/                # Static assets
-├── docker-compose.yml     # Docker services
-├── Dockerfile             # App container
-├── nginx.conf             # Nginx configuration
-└── .env.example           # Environment template
-```
+---
 
 ## 🔐 Security
 
-- Helmet.js for security headers
-- Content Security Policy (CSP)
-- Rate limiting
-- Input validation with Zod
-- HTTPS-only in production
-- Append-only audit logs
-- Professional liability insurance: €1 million
+- ✅ Helmet.js security headers
+- ✅ Content Security Policy (CSP)
+- ✅ Rate limiting
+- ✅ Input validation (Zod)
+- ✅ HTTPS-only in production
+- ✅ Append-only audit logs
+- ✅ €1 million professional liability insurance
 
-## 📊 Legal Basis
+---
+
+## 📜 Legal Framework
 
 All services comply with:
 - **Article 4**: Regulation (EU) 2019/1020 - Market Surveillance
 - **Article 16**: Regulation (EU) 2023/988 - General Product Safety
 
-## 📧 Support
+**Jurisdiction**: Maltese law  
+**Insurance**: €1 million professional liability
+
+---
+
+## 🐳 Deployment
+
+### Hetzner VPS Production Deployment
+
+Follow the comprehensive guide: **[DEPLOYMENT.md](DEPLOYMENT.md)**
+
+Includes:
+- Server setup
+- Docker configuration
+- Nginx reverse proxy
+- SSL/TLS with Let's Encrypt
+- Firewall configuration
+- Backup strategies
+- Monitoring setup
+
+### GitHub to Hetzner CI/CD
+
+Automated deployment via GitHub Actions: **[GITHUB_DEPLOYMENT.md](GITHUB_DEPLOYMENT.md)**
+
+---
+
+## 📁 Project Structure
+
+```
+EuroConform/
+├── app/                    # Next.js pages (13 pages)
+│   ├── page.tsx           # Home
+│   ├── pricing/           # Pricing page
+│   ├── faq/               # FAQ page
+│   ├── contact/           # Contact form
+│   ├── verify/[code]/     # Product verification
+│   ├── auth/login/        # Authentication
+│   ├── dashboard/         # Client portal
+│   │   ├── page.tsx       # Main dashboard
+│   │   ├── products/      # Products management
+│   │   ├── designations/  # Designations wizard
+│   │   └── audit/         # Audit log
+│   └── api/               # API endpoints
+├── lib/                   # Core utilities (10 modules)
+├── components/ui/         # shadcn/ui components
+├── prisma/
+│   └── schema.prisma      # Complete database schema
+├── docker-compose.yml     # Docker services
+├── Dockerfile             # Production container
+├── nginx.conf             # Reverse proxy
+├── DEPLOYMENT.md          # Server setup guide
+├── README.md              # This file
+└── .env.example           # Configuration template
+```
+
+---
+
+## 📚 Documentation
+
+- **[README.md](README.md)** - This file (project overview)
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment guide
+- **[GITHUB_DEPLOYMENT.md](GITHUB_DEPLOYMENT.md)** - CI/CD setup
+- **[NEXT_STEPS.md](NEXT_STEPS.md)** - Integration guide
+- **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** - Status overview
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run linting
+npm run lint
+
+# Build production
+npm run build
+
+# Start production server
+npm start
+
+# Database studio
+npm run db:studio
+```
+
+---
+
+## 🔄 Development Workflow
+
+```bash
+# Create feature branch
+git checkout -b feature/new-feature
+
+# Make changes and commit
+git add .
+git commit -m "Add feature"
+
+# Push and create PR
+git push origin feature/new-feature
+```
+
+---
+
+## 📞 Support
 
 - **Email**: rudvel@gmail.com
 - **Company**: EuroConform Ltd, Malta
 - **Insurance**: €1 million professional liability
+- **GitHub**: https://github.com/agilexplus-rv/euroconform
+
+---
 
 ## 📝 License
 
 Proprietary - © EuroConform Ltd. All rights reserved.
 
-## 🤝 Contributing
+This software is confidential and proprietary. Unauthorized copying, modification, distribution, or use is strictly prohibited.
 
-This is a private commercial project. For partner opportunities, contact rudvel@gmail.com.
+---
+
+## 🎉 Status
+
+**Production Ready** ✅
+
+- ✅ All pages implemented
+- ✅ API endpoints functional
+- ✅ Database schema complete
+- ✅ Docker deployment ready
+- ✅ Zero build errors
+- ✅ Comprehensive documentation
+- ✅ Security best practices
+
+---
+
+**Built with ❤️ for EU compliance** 🇪🇺
