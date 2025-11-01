@@ -188,7 +188,7 @@ export default function FAQPage() {
                   and a dedicated account manager.
                 </p>
                 <div className="mt-4">
-                  <Button asChild><Link href="/contact">Contact Us</Link></Button>
+                  <Button asChild><Link href="/#contact">Contact Us</Link></Button>
                 </div>
               </CardContent>
             </Card>

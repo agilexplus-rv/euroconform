@@ -21,11 +21,11 @@ export default function PricingPage() {
             <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
               Home
             </Link>
-            <Link href="/faq" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link href="/#faq-teaser" className="text-sm font-medium hover:text-primary transition-colors">
               FAQ
             </Link>
-            <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">
-              Contact
+            <Link href="/#contact" className="text-sm font-medium hover:text-primary transition-colors">
+              Contact Us
             </Link>
             <Button asChild>
               <Link href="/auth/login">Sign In</Link>
