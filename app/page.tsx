@@ -325,6 +325,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Additional Services */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-3xl">
+            <h3 className="text-2xl font-bold text-center mb-8">Additional Services</h3>
+            <Card>
+              <CardContent className="pt-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h4 className="font-semibold mb-2">{config.addOns.technicalFileCheck.name}</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Expert review of technical documentation to ensure regulatory compliance
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold">€100</p>
+                    <p className="text-sm text-muted-foreground">{config.addOns.technicalFileCheck.unit}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-24">
         <div className="container mx-auto px-4">
