@@ -27,7 +27,7 @@ export default function Home() {
               Contact
             </Link>
             <Link href="/verify" className="text-sm font-medium hover:text-primary transition-colors">
-              Verify Product
+              Verify
             </Link>
             <Button asChild>
               <Link href="/auth/login">Sign In</Link>
@@ -47,14 +47,14 @@ export default function Home() {
               Your Gateway to EU Product Compliance
             </h1>
             <p className="mb-8 text-xl text-blue-100">
-              EU Authorised Representative & Responsible Person services ensuring smooth EU market access under Article 4 (Regulation EU 2019/1020) and Article 16 (Regulation EU 2023/988)
+              Unlock the benefits of the EU market through our comprehensive compliance services. Let us be your trusted partner for seamless market access across all 27 EU member states.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="bg-white text-primary hover:bg-gray-100">
                 <Link href="/pricing">Get Started</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                <Link href="/contact">Contact Us</Link>
+              <Button asChild size="lg" variant="outline" className="border-white text-[#0A3D91] hover:bg-primary hover:text-white hover:border-white">
+                <Link href="#contact">Contact Us</Link>
               </Button>
             </div>
           </div>
@@ -67,25 +67,16 @@ export default function Home() {
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Why Choose EuroConform?</h2>
             <p className="text-lg text-muted-foreground">
-              Professional compliance partner headquartered in Malta with €1 million professional liability insurance
+              Professional compliance partner headquartered in Malta, ensuring your products meet all EU requirements
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
                 <Shield className="h-10 w-10 text-primary mb-4" />
-                <CardTitle>EU Authorised Representative</CardTitle>
+                <CardTitle>EU Compliance Services</CardTitle>
                 <CardDescription>
-                  Compliant with Article 4, Regulation (EU) 2019/1020 - Market Surveillance and Compliance of Products
-                </CardDescription>
-              </CardHeader>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Users className="h-10 w-10 text-primary mb-4" />
-                <CardTitle>Responsible Person</CardTitle>
-                <CardDescription>
-                  Compliant with Article 16, Regulation (EU) 2023/988 - General Product Safety Regulation
+                  Comprehensive EU Authorised Representative and Responsible Economic Operator services for seamless market access
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -121,7 +112,7 @@ export default function Home() {
                 <Star className="h-10 w-10 text-primary mb-4" />
                 <CardTitle>Expert Support</CardTitle>
                 <CardDescription>
-                  Dedicated account management for Gold clients with priority support
+                  Dedicated account management with priority support
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -182,10 +173,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t bg-gray-50 py-12">
+      {/* Contact & Pricing Section */}
+      <section id="contact" className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-4">
+          <div className="mx-auto max-w-4xl">
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="border-primary border-2">
+                <CardHeader>
+                  <CardTitle className="text-primary">Get Started Today</CardTitle>
+                  <CardDescription>
+                    Choose the plan that fits your business needs
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    From €1,000/year for small manufacturers to comprehensive enterprise solutions
+                  </p>
+                  <Button asChild className="w-full">
+                    <Link href="/pricing">View Pricing</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+              <Card className="border-primary border-2">
+                <CardHeader>
+                  <CardTitle className="text-primary">Have Questions?</CardTitle>
+                  <CardDescription>
+                    Our team is here to help you succeed
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Reach out to discuss your compliance needs and get expert guidance
+                  </p>
+                  <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white">
+                    <Link href="/contact">Contact Us</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t bg-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-3">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-xl">
@@ -209,21 +242,12 @@ export default function Home() {
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/contact" className="text-muted-foreground hover:text-primary">Contact Us</Link></li>
-                <li><Link href="/partners" className="text-muted-foreground hover:text-primary">Partner Program</Link></li>
-                <li><Link href="/trade-fairs" className="text-muted-foreground hover:text-primary">Trade Fairs</Link></li>
+                <li><Link href="/auth/login" className="text-muted-foreground hover:text-primary">Sign In</Link></li>
               </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
-              <p className="text-sm text-muted-foreground">
-                EuroConform Ltd<br />
-                Malta<br />
-                Professional Liability: €1 million
-              </p>
             </div>
           </div>
           <div className="mt-12 border-t pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} EuroConform Ltd. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} EuroConform Ltd, Malta. All rights reserved.</p>
           </div>
         </div>
       </footer>

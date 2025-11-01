@@ -68,35 +68,6 @@ export default function ContactPage() {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl">
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Office Address</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    EuroConform Ltd<br />
-                    Malta<br />
-                    European Union
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Contact Information</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    <strong>Email:</strong><br />
-                    <a href="mailto:rudvel@gmail.com" className="text-primary hover:underline">rudvel@gmail.com</a>
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    <strong>Professional Liability:</strong><br />
-                    €1 million coverage
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
 
             <Card>
               <CardHeader>
@@ -104,7 +75,7 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
+                  <div className="space-y-2">
                     <Label htmlFor="name">Full Name *</Label>
                     <Input
                       id="name"
@@ -113,7 +84,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <Label htmlFor="email">Email Address *</Label>
                     <Input
                       id="email"
@@ -123,7 +94,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <Label htmlFor="company">Company</Label>
                     <Input
                       id="company"
@@ -131,7 +102,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     />
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
@@ -155,23 +126,20 @@ export default function ContactPage() {
                       </p>
                     </div>
                   )}
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </Button>
+                  <div className="space-y-4">
+                    <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                      <p className="text-xs text-yellow-900">
+                        <strong>Spam Protection:</strong> All contact submissions are monitored and verified to ensure quality communication.
+                      </p>
+                    </div>
+                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </Button>
+                  </div>
                 </form>
               </CardContent>
             </Card>
 
-            <div className="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-              <h3 className="font-semibold mb-2">Interested in Becoming a Partner?</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Join our partner program and earn a 20% commission on referrals. Approved partners receive their own 
-                referral dashboard and tracking codes.
-              </p>
-              <Button asChild variant="outline">
-                <Link href="/partners">Learn More</Link>
-              </Button>
-            </div>
           </div>
         </div>
       </section>

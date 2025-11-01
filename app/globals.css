@@ -120,4 +120,12 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Cursor pointer for all links and buttons */
+  a, button {
+    cursor: pointer;
+  }
+  /* Form label spacing */
+  label {
+    @apply mb-2 block;
+  }
 }

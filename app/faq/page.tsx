@@ -137,12 +137,11 @@ export default function FAQPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>What is EuroConform&apos;s insurance coverage?</CardTitle>
+                <CardTitle>What legal protections are in place?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  EuroConform Ltd maintains €1 million in professional liability insurance coverage. 
-                  Our liability is limited to fees paid in the preceding 12 months. All contracts are governed by Maltese law and jurisdiction.
+                  EuroConform Ltd operates in full compliance with EU regulations. Our liability is limited to fees paid in the preceding 12 months. All contracts are governed by Maltese law and jurisdiction.
                 </p>
               </CardContent>
             </Card>
@@ -184,7 +183,7 @@ export default function FAQPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground mb-2">
-                  For general inquiries, please use the contact form or email rudvel@gmail.com. 
+                  For general inquiries, please use the contact form. 
                   Bronze and Silver clients receive standard email support, while Gold clients have access to priority support 
                   and a dedicated account manager.
                 </p>

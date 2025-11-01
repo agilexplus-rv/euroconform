@@ -73,7 +73,7 @@ export default function NewProductPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div>
+                <div className="space-y-2">
                   <Label htmlFor="name">Product Name *</Label>
                   <Input
                     id="name"
@@ -84,7 +84,7 @@ export default function NewProductPage() {
                   />
                 </div>
 
-                <div>
+                <div className="space-y-2">
                   <Label htmlFor="model">Model Number</Label>
                   <Input
                     id="model"
@@ -94,7 +94,7 @@ export default function NewProductPage() {
                   />
                 </div>
 
-                <div>
+                <div className="space-y-2">
                   <Label htmlFor="category">Category</Label>
                   <Select onValueChange={(value) => setFormData({ ...formData, category: value })}>
                     <SelectTrigger>
@@ -111,7 +111,7 @@ export default function NewProductPage() {
                   </Select>
                 </div>
 
-                <div>
+                <div className="space-y-2">
                   <Label htmlFor="description">Description</Label>
                   <Textarea
                     id="description"
